@@ -13,11 +13,13 @@ export default function FiltersPage() {
 
   return (
     <div className="p-4 flex flex-col gap-4">
-      <button onClick={() => navigate(-1)} 
-        className="text-purple-600 !p-0 text-xl w-8 flex items-center justify-center">
-        <MdArrowBack />
-      </button>
-      <h1 className="text-lg font-bold">Filters</h1>
+      <div className='relative w-full'>
+        <button onClick={() => navigate(-1)} 
+            className="absolute left-[-8px] text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
+            <MdArrowBack className='w-8 h-6' />
+        </button>
+        <h1 className="w-full text-center !text-base font-bold">Filters</h1>
+      </div>
       <FiltersForm initial={initial} onApply={handleApply} />
     </div>
   )

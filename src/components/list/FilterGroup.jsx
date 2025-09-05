@@ -7,10 +7,10 @@ export default function FilterGroup({ label, options, value, onChange }) {
           <button
             key={opt.value}
             onClick={() => onChange(opt.value)}
-            className={`px-4 py-1 rounded-md border ${
+            className={`px-4 !text-sm !font-semibold py-1 rounded-md border ${
               value === opt.value
                 ? '!bg-(--color-primary-100) text-(--color-primary) border-purple-400'
-                : 'bg-white !border-(--color-border) text-(--color-text-primary) border-gray-300'
+                : '!bg-white !border-(--color-border) text-(--color-text-primary) border-gray-300'
             }`}
           >
             {opt.label}

@@ -2,7 +2,7 @@ export default function FilterGroup({ label, options, value, onChange }) {
   return (
     <div className="flex flex-col gap-2">
       <p className="!text-sm font-medium color-(--color-text-secondary)">{label}</p>
-      <div className="flex gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {options.map((opt) => (
           <button
             key={opt.value}

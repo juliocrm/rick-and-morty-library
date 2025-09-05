@@ -42,7 +42,7 @@ export default function FiltersForm({ initial, onApply }) {
       />
       <button
         onClick={handleApply}
-        className="mt-auto py-2 rounded-md !bg-(--color-primary) text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-auto py-2 rounded-md !bg-(--color-primary) !text-sm text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={!isChanged}
       >
         Filter

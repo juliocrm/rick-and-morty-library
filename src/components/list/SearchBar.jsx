@@ -12,7 +12,7 @@ export default function SearchBar({ value, onChange, onFilterClick  }) {
         className="flex-1 bg-transparent outline-none text-sm"
       />
       <FiSliders 
-        className="text-gray-400 text-lg cursor-pointer" 
+        className="w-[38px] h-[38px] rounded-lg text-(--color-primary) hover:bg-(--color-primary-100) p-2 text-lg cursor-pointer" 
         onClick={onFilterClick}    
     />
     </div>

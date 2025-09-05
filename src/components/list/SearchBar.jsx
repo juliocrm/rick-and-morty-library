@@ -1,6 +1,6 @@
 import { FiSearch, FiSliders } from 'react-icons/fi'
 
-export default function SearchBar({ value, onChange }) {
+export default function SearchBar({ value, onChange, onFilterClick  }) {
   return (
     <div className="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
       <FiSearch className="text-gray-400 text-lg" />
@@ -11,7 +11,10 @@ export default function SearchBar({ value, onChange }) {
         placeholder="Search or filter results"
         className="flex-1 bg-transparent outline-none text-sm"
       />
-      <FiSliders className="text-gray-400 text-lg cursor-pointer" />
+      <FiSliders 
+        className="text-gray-400 text-lg cursor-pointer" 
+        onClick={onFilterClick}    
+    />
     </div>
   )
 }

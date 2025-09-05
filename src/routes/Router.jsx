@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom'
 import ListPage from '../pages/ListPage'
 import DetailPage from '../pages/DetailPage'
+import FiltersPage from '../pages/FiltersPage'
 import MainLayout from '../layouts/MainLayout'
 import useIsDesktop from '../hooks/useIsDesktop'
 
@@ -25,6 +26,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<ListPage />} />
+      <Route path="/filters" element={<FiltersPage />} />
       <Route path="/character/:id" element={<DetailPage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

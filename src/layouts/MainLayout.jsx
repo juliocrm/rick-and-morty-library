@@ -6,7 +6,12 @@ export default function MainLayout({ list, detail }) {
   if (isDesktop) {
     return (
       <div className="min-h-screen grid grid-cols-[320px_1fr]">
-        <div className="border-r">{list}</div>
+        <div
+          className="bg-white"
+          style={{ boxShadow: 'inset -5px 0 28px -8px var(--color-primary-100)' }}
+        >
+          {list}
+        </div>
         <div>{detail}</div>
       </div>
     )

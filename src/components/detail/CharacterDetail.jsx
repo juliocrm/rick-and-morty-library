@@ -2,7 +2,6 @@ import FavoriteButton from './FavoriteButton'
 import Property from './Property'
 
 export default function CharacterDetail({ character }) {
-    console.log(character)
   return (
     <div className="p-4 text-left gap-4 w-full">
       <div className="relative h-[75px] w-[75px]">

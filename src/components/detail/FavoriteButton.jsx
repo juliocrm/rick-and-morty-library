@@ -9,14 +9,17 @@ export default function FavoriteButton({ characterId, className }) {
 
   return (
     <button
-      onClick={() => toggleFavorite(characterId)}
+      onClick={ e => {
+        e.stopPropagation();
+        toggleFavorite(characterId)
+      }}
       className={classNames}
       aria-label="Toggle favorite"
     >
       {isFavorite ? (
-        <MdFavorite className="text-green-500 text-xl translate-y-[1px]" />
+        <MdFavorite className="text-green-500 text-xl scale-[1.2] translate-y-[1px]" />
       ) : (
-        <MdFavoriteBorder className="text-gray-400 text-xl" />
+        <MdFavoriteBorder className="text-gray-400 text-xl scale-[1.2]" />
       )}
     </button>
   )

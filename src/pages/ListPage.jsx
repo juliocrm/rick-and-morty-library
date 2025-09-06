@@ -68,7 +68,7 @@ export default function ListPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4 mt-[44px]">Rick and Morty list</h1>
+      <h1 className="text-xl font-bold mb-6 mt-[44px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters}/>
       {showFilters && !isMobile && (
           <FiltersDropdown

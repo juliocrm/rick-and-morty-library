@@ -9,7 +9,7 @@ export default function SearchBar({ value, onChange, onFilterClick  }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search or filter results"
-        className="flex-1 bg-transparent outline-none text-sm"
+        className="flex-1 bg-transparent outline-none text-sm placeholder:font-medium"
       />
       <FiSliders 
         className="w-[38px] h-[38px] rounded-lg text-(--color-primary) hover:bg-(--color-primary-100) p-2 text-lg cursor-pointer" 

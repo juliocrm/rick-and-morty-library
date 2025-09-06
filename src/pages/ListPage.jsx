@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client/react'
 import { GET_CHARACTERS } from '../apollo/queries'
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useFavorites } from '../context/FavoritesContext'
 import CharacterList from '../components/list/CharacterList'
 import SearchBar from '../components/list/SearchBar'
 import useDebounce from '../hooks/useDebounce'
@@ -12,6 +13,7 @@ export default function ListPage() {
   const [filters, setFilters] = useState({});
   const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { favorites, toggleFavorite } = useFavorites();
   const debouncedSearch = useDebounce(search, 500);
   const location = useLocation();
   const navigate = useNavigate();
@@ -61,6 +63,9 @@ export default function ListPage() {
 
   const characters = data?.characters?.results || []
 
+  const starredCharacters = characters.filter(c => favorites.includes(c.id));
+  const otherCharacters = characters.filter(c => !favorites.includes(c.id));
+
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Rick and Morty list</h1>
@@ -75,7 +80,8 @@ export default function ListPage() {
 
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
-      {!loading && !error && <CharacterList characters={characters} />}
+      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS'/>}
+      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS'/>}
     </div>
   )
 }

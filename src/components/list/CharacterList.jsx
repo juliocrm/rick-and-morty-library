@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CharacterCard from './CharacterCard'
 
-export default function CharacterList({ characters }) {
+export default function CharacterList({ characters, listTitle = '' }) {
   const [selectedId, setSelectedId] = useState(null);
 
   if (!characters || characters.length === 0) {
@@ -9,7 +9,8 @@ export default function CharacterList({ characters }) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-4">
+      <h2>{listTitle}</h2>
       {characters.map((char) => (
         <CharacterCard
           key={char.id}

@@ -68,7 +68,7 @@ export default function ListPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Rick and Morty list</h1>
+      <h1 className="text-xl font-bold mb-4 mt-[44px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters}/>
       {showFilters && !isMobile && (
           <FiltersDropdown
@@ -77,10 +77,10 @@ export default function ListPage() {
             onClose={() => null}
           />
       )}
-      <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>
+      {activeFilters > 0 && <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>}
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
-      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS'/>}
+      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={'!mt-10'}/>}
       {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS'/>}
     </div>
   )

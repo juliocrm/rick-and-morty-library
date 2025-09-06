@@ -7,6 +7,7 @@ import CharacterList from '../components/list/CharacterList'
 import SearchBar from '../components/list/SearchBar'
 import useDebounce from '../hooks/useDebounce'
 import FiltersDropdown from '../components/list/FiltersDropdown'
+import FilterSummary from '../components/list/FilterSummary'
 
 export default function ListPage() {
   const [search, setSearch] = useState('');
@@ -53,8 +54,6 @@ export default function ListPage() {
       setShowFilters((prev) => !prev)
     }
   }
-  useEffect(() => {
-    }, [showFilters]);
 
   const handleApplyFilters = (newFilters) => {
     setFilters(newFilters)
@@ -65,6 +64,7 @@ export default function ListPage() {
 
   const starredCharacters = characters.filter(c => favorites.includes(c.id));
   const otherCharacters = characters.filter(c => !favorites.includes(c.id));
+  const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
     <div className="p-4">
@@ -77,7 +77,7 @@ export default function ListPage() {
             onClose={() => null}
           />
       )}
-
+      <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
       {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS'/>}

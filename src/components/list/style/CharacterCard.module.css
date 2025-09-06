@@ -2,7 +2,7 @@
     content: "";
     bottom: 0;
     left: 50%;
-    width: 260px;
+    width: 318px;
     height: 1px;
     border: 1px solid var(--color-border);
     pointer-events: none;
@@ -13,4 +13,27 @@
 .card {
     position: relative;
     overflow: hidden;
+    height: 74px;
+    border: 1px solid white;
+    border-radius: 8px;
+    align-items: center;
+    padding: 12px;
+}
+
+@media (min-width: 768px) {
+    .card {
+        width: 300px;
+    }
+    .card:not(:last-child)::after {
+        content: "";
+        bottom: 0;
+        left: 50%;
+        width: 260px;
+        height: 1px;
+        border: 1px solid var(--color-border);
+        pointer-events: none;
+        z-index: 2;
+        position: absolute;
+        transform: translate(-50%, 50%);
+    }
 }

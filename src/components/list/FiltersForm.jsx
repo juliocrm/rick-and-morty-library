@@ -19,30 +19,33 @@ export default function FiltersForm({ initial, onApply }) {
   }
 
   return (
-    <div className={`flex flex-col gap-6 ${isDesktop? 'max-h-64': 'min-h-screen'}`}>
-      <FilterGroup
-        label="Characters"
-        value={characterType}
-        onChange={setCharacterType}
-        options={[
-          { label: 'All', value: 'all' },
-          { label: 'Starred', value: 'starred' },
-          { label: 'Others', value: 'others' },
-        ]}
-      />
-      <FilterGroup
-        label="Specie"
-        value={species}
-        onChange={setSpecies}
-        options={[
-          { label: 'All', value: 'all' },
-          { label: 'Human', value: 'human' },
-          { label: 'Alien', value: 'alien' },
-        ]}
-      />
+    <div className={`flex flex-1 flex-col justify-between
+      ${isDesktop? 'max-h-64': ''}`}>
+      <div className="flex flex-col gap-6">
+        <FilterGroup
+          label="Characters"
+          value={characterType}
+          onChange={setCharacterType}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Starred', value: 'starred' },
+            { label: 'Others', value: 'others' },
+          ]}
+        />
+        <FilterGroup
+          label="Specie"
+          value={species}
+          onChange={setSpecies}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Human', value: 'human' },
+            { label: 'Alien', value: 'alien' },
+          ]}
+        />
+      </div>
       <button
         onClick={handleApply}
-        className="mt-auto py-2 rounded-md !bg-(--color-primary) !text-sm text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-4 py-2 rounded-md !bg-(--color-primary) !text-sm text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={!isChanged}
       >
         Filter

@@ -2,7 +2,7 @@
 
 :root {
   width: 100%;
-  height: 100%;
+  min-height: 100px;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -19,15 +19,18 @@
 
   --color-primary: #8054C7;
   --color-primary-100: #EEE3FF;
+  --color-green-400: #3B8520;
+  --color-green-100: #e0f7d7;
+  --color-blue-400: #2563EB;
+
 
   --color-text-primary: #111827;
   --color-text-secondary: #6B7280;
 
+
   --color-border: #e5e7eb;
   --color-selected: #EEE3FF;
 }
-
-
 body {
   margin: 0;
   min-width: 320px;

@@ -18,7 +18,7 @@ function Layout({ list, detail }) {
     )
   }
 
-  return <div className="min-h-screen">{list || detail}</div>
+  return <div style={{ minHeight: '100dvh' }}>{list || detail}</div>
 }
 
 export default function MainLayout({ list, detail }) {

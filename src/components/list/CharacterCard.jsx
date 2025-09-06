@@ -8,8 +8,6 @@ export default function CharacterCard({ character, onClick,selected }) {
       to={`/character/${character.id}`}
       onClick={onClick}
       className={`flex items-center gap-4 p-3 
-        h-[74px]
-        rounded-lg
         hover:bg-gray-50 transition 
         ${selected ? '!bg-(--color-selected)' : 'bg-white'}
         ${styles.card}`}

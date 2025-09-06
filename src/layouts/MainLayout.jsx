@@ -1,6 +1,7 @@
 import useIsDesktop from '../hooks/useIsDesktop'
+import { SelectionProvider } from '../components/list/SelectionContext'
 
-export default function MainLayout({ list, detail }) {
+function Layout({ list, detail }) {
   const isDesktop = useIsDesktop()
 
   if (isDesktop) {
@@ -18,4 +19,12 @@ export default function MainLayout({ list, detail }) {
   }
 
   return <div className="min-h-screen">{list || detail}</div>
+}
+
+export default function MainLayout({ list, detail }) {
+  return (
+    <SelectionProvider>
+      <Layout list={list} detail={detail} />
+    </SelectionProvider>
+  );
 }

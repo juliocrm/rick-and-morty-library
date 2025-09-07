@@ -112,8 +112,8 @@ export default function ListPage() {
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-6 mt-4 md:mt-[26px]">Rick and Morty list</h1>
+    <div className="p-x-0 sm:p-4">
+      <h1 className="text-xl font-bold mx-4 sm:mx-0 mb-6 mt-4 md:mt-[26px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters} />
       {showFilters && isDesktop && (
         <FiltersDropdown
@@ -136,8 +136,8 @@ export default function ListPage() {
       }
       {!loading && !error && (
         <>
-          <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`pl-3 ${activeFilters > 0 && isDesktop ? 'sm:!mt-0' : '!mt-8 sm:!mt-10'}`} />
-          <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={'!mt-4 pl-3'} />
+          <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`!mx-5 ${activeFilters > 0 && isDesktop ? 'sm:!mt-0' : '!mt-6 sm:!mt-2'}`} />
+          <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={'!mt-2 !mx-5'} />
         </>
       )}
     </div>

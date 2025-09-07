@@ -41,9 +41,24 @@ export default function ListPage() {
     },
   });
 
-  const characters = data?.characters?.results || []
-  const starredCharacters = characters.filter(c => favorites.includes(c.id));
-  const otherCharacters = characters.filter(c => !favorites.includes(c.id));
+  const characters = data?.characters?.results || [];
+  let filteredCharacters = characters;
+  if (filters.species && filters.species !== 'all') {
+    filteredCharacters = filteredCharacters.filter(c => c.species?.toLowerCase() === filters.species.toLowerCase());
+  }
+
+  let starredCharacters = filteredCharacters;
+  let otherCharacters = filteredCharacters;
+  if (filters.characterType === 'starred') {
+    starredCharacters = filteredCharacters.filter(c => favorites.includes(c.id));
+    otherCharacters = [];
+  } else if (filters.characterType === 'others') {
+    starredCharacters = [];
+    otherCharacters = filteredCharacters.filter(c => !favorites.includes(c.id));
+  } else {
+    starredCharacters = filteredCharacters.filter(c => favorites.includes(c.id));
+    otherCharacters = filteredCharacters.filter(c => !favorites.includes(c.id));
+  }
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
@@ -61,11 +76,11 @@ export default function ListPage() {
         </button>
       </div>
       
-      {activeFilters > 0 && <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>}
+      {activeFilters > 0 && <FilterSummary resultsCount={starredCharacters.length + otherCharacters.length} activeFilters={activeFilters}></FilterSummary>}
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
-      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`!mt-0 !ml-0 content-center !h-[56px] ${styles.card}`}/>}
-      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={`pl-3`} feedback={true} />}
+      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`!m-0 !px-4 content-center !h-[56px] ${styles.card}`}/>}
+      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={`!px-5 sm:!px-4 !mb-4`} />}
     </div>
   )
 }

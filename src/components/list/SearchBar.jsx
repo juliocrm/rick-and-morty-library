@@ -2,7 +2,7 @@ import { FiSearch, FiSliders } from 'react-icons/fi'
 
 export default function SearchBar({ value, onChange, onFilterClick  }) {
   return (
-    <div className="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
+    <div className="flex items-center gap-2 bg-gray-100 mx-4 sm:mx-0 rounded-lg px-4 py-2">
       <FiSearch className="text-gray-400 text-lg" />
       <input
         type="text"

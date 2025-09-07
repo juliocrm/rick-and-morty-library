@@ -1,5 +1,9 @@
 # Rick & Morty Character Library
 
+## Demo
+
+[https://rick-and-morty-library.netlify.app/](https://rick-and-morty-library.netlify.app/)
+
 This is a simple web application built with React and Vite that allows users to browse characters from the Rick and Morty universe. You can view character details, mark them as favorites, and even add your own personal notes.
 
 ## Features

@@ -126,7 +126,7 @@ export default function ListPage() {
         <FilterSummary resultsCount={starredCharacters.length + otherCharacters.length} activeFilters={activeFilters}></FilterSummary>
       }
       {loading && 
-        <p className="text-gray-500 mt-4">Loading...</p>
+        <p className="text-gray-500 mt-4 pl-4 sm:pl-0">Loading...</p>
       }
       {error && 
         <p className="text-red-500 mt-4">Error loading characters</p>

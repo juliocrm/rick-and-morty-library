@@ -20,7 +20,7 @@ export default function FiltersPage() {
             className="absolute left-[-8px] text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
             <MdArrowBack className='w-8 h-6' />
         </button>
-        <h1 className="w-full text-center !text-base font-bold">Filters</h1>
+        <h1 className="w-full pb-8 text-center !text-base font-bold">Filters</h1>
       </div>
       <FiltersForm initial={initial} onApply={handleApply} />
     </div>

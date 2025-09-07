@@ -37,7 +37,7 @@ export default function DetailPage() {
   }
 
   return (
-    <div className="p-4 px-[100px] pt-[40px]">
+    <div className="p-4 px-6 md:px-[100px] pt-[40px]">
       {!isDesktop && <BackButton />}
       <CharacterDetail character={data.character} />
     </div>

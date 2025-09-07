@@ -23,11 +23,10 @@
   --color-green-100: #e0f7d7;
   --color-blue-400: #2563EB;
 
-
   --color-text-primary: #111827;
   --color-text-secondary: #6B7280;
 
-
+  --color-bg-disabled: #F3F4F6;
   --color-border: #e5e7eb;
   --color-selected: #EEE3FF;
 }

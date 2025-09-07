@@ -45,7 +45,7 @@ export default function FiltersForm({ initial, onApply }) {
       </div>
       <button
         onClick={handleApply}
-        className="mt-4 py-2 rounded-md !bg-(--color-primary) !text-sm text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-4 py-2 rounded-md !bg-(--color-primary) !text-sm text-white font-medium disabled:text-(--color-text-secondary) disabled:!bg-(--color-bg-disabled) disabled:cursor-not-allowed"
         disabled={!isChanged}
       >
         Filter

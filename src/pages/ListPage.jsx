@@ -123,7 +123,7 @@ export default function ListPage() {
         />
       )}
       {activeFilters > 0 && isDesktop && 
-        <FilterSummary resultsCount={data?.characters?.info?.count || 0} activeFilters={activeFilters}></FilterSummary>
+        <FilterSummary resultsCount={starredCharacters.length + otherCharacters.length} activeFilters={activeFilters}></FilterSummary>
       }
       {loading && 
         <p className="text-gray-500 mt-4">Loading...</p>

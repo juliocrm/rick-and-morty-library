@@ -14,7 +14,7 @@ export default function DetailPage() {
 
   if (loading) {
     return (
-      <div className="p-4">
+      <div className="p-4 md:px-[100px] sm:pt-[40px]">
         <p className="text-gray-500">Loading...</p>
       </div>
     )
@@ -22,7 +22,7 @@ export default function DetailPage() {
 
   if (error) {
     return (
-      <div className="p-4">
+      <div className="p-4 md:px-[100px] sm:pt-[40px]">
         <p className="text-red-500">Error loading character</p>
       </div>
     )
@@ -30,14 +30,14 @@ export default function DetailPage() {
 
   if (!data?.character) {
     return (
-      <div className="p-4">
+      <div className="p-4 md:px-[100px] sm:pt-[40px]">
         <p className="text-gray-500">Character not found</p>
       </div>
     )
   }
 
   return (
-    <div className="p-4 px-6 md:px-[100px] pt-[40px]">
+    <div className="p-4 md:px-[100px] sm:pt-[40px]">
       {!isDesktop && <BackButton />}
       <CharacterDetail character={data.character} />
     </div>

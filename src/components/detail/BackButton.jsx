@@ -4,11 +4,9 @@ import { MdArrowBack } from 'react-icons/md'
 export default function BackButton() {
   const navigate = useNavigate()
   return (
-    <button
-      onClick={() => navigate(-1)}
-      className="flex items-center gap-2 text-blue-600 hover:underline mb-4"
-    >
-      <MdArrowBack className='w-8 h-6' />
+    <button onClick={() => navigate(-1)} 
+        className="left-[-8px] text-(--color-primary) !bg-transparent !p-0 text-xl h-8 w-8 flex items-center justify-center">
+        <MdArrowBack size={21} />
     </button>
   )
 }

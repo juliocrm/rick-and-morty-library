@@ -10,7 +10,7 @@ export default function FiltersPage() {
   const isDesktop = useIsDesktop();
 
   const handleApply = (filters) => {
-    navigate('/', { state: { filters } })
+    navigate('/filters/advance-search', { state: { filters } })
   }
 
   return (

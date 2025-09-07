@@ -3,15 +3,14 @@ import { GET_CHARACTERS } from '../apollo/queries'
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useFavorites } from '../context/FavoritesContext'
+import { MdArrowBack } from 'react-icons/md'
 import CharacterList from '../components/list/CharacterList'
-import SearchBar from '../components/list/SearchBar'
 import useDebounce from '../hooks/useDebounce'
-import FiltersDropdown from '../components/list/FiltersDropdown'
+import FilterSummary from '../components/list/FilterSummary'
 
 export default function ListPage() {
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({});
-  const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const { favorites, toggleFavorite } = useFavorites();
   const debouncedSearch = useDebounce(search, 500);
@@ -24,11 +23,6 @@ export default function ListPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    if (isMobile) {
-      setShowFilters(false);
-    }
-  }, [isMobile]);
 
   useEffect(() => {
     if (location.state?.filters) {
@@ -44,42 +38,29 @@ export default function ListPage() {
           species: filters.species !== 'all' ? filters.species : undefined,
       },
     },
-  })
-
-  const handleOpenFilters = () => {
-    if (isMobile) {
-      navigate('/filters', { state: { filters } })
-    } else {
-      setShowFilters((prev) => !prev)
-    }
-  }
-
-  const handleApplyFilters = (newFilters) => {
-    setFilters(newFilters)
-    setShowFilters(false)
-  }
+  });
 
   const characters = data?.characters?.results || []
-
   const starredCharacters = characters.filter(c => favorites.includes(c.id));
   const otherCharacters = characters.filter(c => !favorites.includes(c.id));
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-6 mt-4 md:mt-[44px]">Rick and Morty list</h1>
-      <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters}/>
-      {showFilters && !isMobile && (
-          <FiltersDropdown
-            initial={filters}
-            onApply={handleApplyFilters}
-            onClose={() => null}
-          />
-      )}
-      {loading && <p className="text-gray-500 mt-4">Loading...</p>}
-      {error && <p className="text-red-500 mt-4">Error loading characters</p>}
+
+      <div className='relative w-full'>
+        <button onClick={() => navigate(-1)} 
+            className="absolute left-[-8px] text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
+            <MdArrowBack className='w-8 h-6' />
+        </button>
+        <h1 className="w-full pb-8 text-center !text-base font-bold">Advanced Search</h1>
+      </div>
+      
+      {activeFilters > 0 && <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>}
+      {loading && <p className="text-gray-500">Loading...</p>}
+      {error && <p className="text-red-500">Error loading characters</p>}
       {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={'!mt-10'}/>}
-      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={'!mt-10'} feedback={true}/>}
+      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' feedback={true} />}
     </div>
   )
 }

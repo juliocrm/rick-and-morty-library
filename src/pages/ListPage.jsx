@@ -15,7 +15,8 @@ export default function ListPage() {
   const [page, setPage] = useState(1);
   const [allCharacters, setAllCharacters] = useState([]);
   const [search, setSearch] = useState('');
-  const [filters, setFilters] = useState({ characterType: 'all', species: 'all' });  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({ characterType: 'all', species: 'all' }); 
+  const [showFilters, setShowFilters] = useState(false);
   const { favorites, toggleFavorite } = useFavorites();
   const debouncedSearch = useDebounce(search, 500);
   const location = useLocation();
@@ -34,11 +35,6 @@ export default function ListPage() {
     }
   }, [location.state]);
 
-  useEffect(() => {
-    setPage(1);
-    setAllCharacters([]);
-  }, [debouncedSearch, filters]);
-
   const apiFilters = useMemo(() => {
     const { characterType, ...rest } = filters;
     for (const key in rest) {
@@ -49,12 +45,16 @@ export default function ListPage() {
     return rest;
   }, [filters]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch, apiFilters]);
+
   const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS, {
-    variables: { 
-        page,
-        filter: {
-          name: debouncedSearch || undefined,
-          ...apiFilters
+    variables: {
+      page,
+      filter: {
+        name: debouncedSearch || undefined,
+        ...apiFilters
       },
     }
   });
@@ -116,11 +116,11 @@ export default function ListPage() {
       <h1 className="text-xl font-bold mb-6 mt-4 md:mt-[44px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters} />
       {showFilters && isDesktop && (
-          <FiltersDropdown
-            initial={filters}
-            onApply={handleApplyFilters}
-            onClose={() => null}
-          />
+        <FiltersDropdown
+          initial={filters}
+          onApply={handleApplyFilters}
+          onClose={() => null}
+        />
       )}
       {activeFilters > 0 && isDesktop && <FilterSummary resultsCount={data?.characters?.info?.count || 0} activeFilters={activeFilters}></FilterSummary>}
       {loading && <p className="text-gray-500 mt-4">Loading...</p>}

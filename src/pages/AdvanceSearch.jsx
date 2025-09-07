@@ -65,7 +65,7 @@ export default function ListPage() {
     <div className="p-4 pt-6">
 
       <div className='w-full pb-4 px-2 flex flex-row justify-between items-center mb-4'>
-        <button onClick={() => navigate(-1)} 
+        <button onClick={() => navigate('/filters', { state: { filters } })} 
             className="text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
             <MdArrowBack className='w-8 h-6' />
         </button>

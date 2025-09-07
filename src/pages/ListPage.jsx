@@ -112,7 +112,7 @@ export default function ListPage() {
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
-    <div className="p-x-0 sm:p-4">
+    <div className="p-x-0 py-4 sm:p-4">
       <h1 className="text-xl font-bold mx-4 sm:mx-0 mb-6 mt-4 md:mt-[26px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters} />
       {showFilters && isDesktop && (

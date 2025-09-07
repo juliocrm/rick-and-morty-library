@@ -12,6 +12,8 @@ import useIsDesktop from '../hooks/useIsDesktop'
 
 
 export default function ListPage() {
+  const [page, setPage] = useState(1);
+  const [allCharacters, setAllCharacters] = useState([]);
   const [search, setSearch] = useState('');
   const [filters, setFilters] = useState({ characterType: 'all', species: 'all' });  const [showFilters, setShowFilters] = useState(false);
   const { favorites, toggleFavorite } = useFavorites();
@@ -19,7 +21,6 @@ export default function ListPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const isDesktop = useIsDesktop();
-
 
   useEffect(() => {
     if (!isDesktop) {
@@ -33,6 +34,11 @@ export default function ListPage() {
     }
   }, [location.state]);
 
+  useEffect(() => {
+    setPage(1);
+    setAllCharacters([]);
+  }, [debouncedSearch, filters]);
+
   const apiFilters = useMemo(() => {
     const { characterType, ...rest } = filters;
     for (const key in rest) {
@@ -43,15 +49,39 @@ export default function ListPage() {
     return rest;
   }, [filters]);
 
-  const { data, loading, error } = useQuery(GET_CHARACTERS, {
+  const { data, loading, error, fetchMore } = useQuery(GET_CHARACTERS, {
     variables: { 
-        page: 1,
+        page,
         filter: {
           name: debouncedSearch || undefined,
           ...apiFilters
       },
-    },
-  })
+    }
+  });
+
+  useEffect(() => {
+    if (data?.characters?.results) {
+      if (page === 1) {
+        setAllCharacters(data.characters.results);
+      } else {
+        setAllCharacters(prev => [...prev, ...data.characters.results]);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 100 || loading) {
+        return;
+      }
+      if (data?.characters?.info?.next) {
+        setPage(data.characters.info.next);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, data]);
 
   const handleOpenFilters = () => {
     if (!isDesktop) {
@@ -66,11 +96,9 @@ export default function ListPage() {
     setShowFilters(false)
   }
 
-  const characters = data?.characters?.results || []
-
   const { starredCharacters, otherCharacters } = useMemo(() => {
-    const allStarred = characters.filter(c => favorites.includes(c.id));
-    const allOthers = characters.filter(c => !favorites.includes(c.id));
+    const allStarred = allCharacters.filter(c => favorites.includes(c.id));
+    const allOthers = allCharacters.filter(c => !favorites.includes(c.id));
 
     if (filters.characterType === 'starred') {
       return { starredCharacters: allStarred, otherCharacters: [] };
@@ -79,7 +107,7 @@ export default function ListPage() {
       return { starredCharacters: [], otherCharacters: allOthers };
     }
     return { starredCharacters: allStarred, otherCharacters: allOthers };
-  }, [characters, favorites, filters.characterType]);
+  }, [allCharacters, favorites, filters.characterType]);
 
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
@@ -94,7 +122,7 @@ export default function ListPage() {
             onClose={() => null}
           />
       )}
-      {activeFilters > 0 && isDesktop && <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>}
+      {activeFilters > 0 && isDesktop && <FilterSummary resultsCount={data?.characters?.info?.count || 0} activeFilters={activeFilters}></FilterSummary>}
       {loading && <p className="text-gray-500 mt-4">Loading...</p>}
       {error && <p className="text-red-500 mt-4">Error loading characters</p>}
       {!loading && !error && (

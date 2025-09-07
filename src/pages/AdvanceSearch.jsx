@@ -7,6 +7,7 @@ import { MdArrowBack } from 'react-icons/md'
 import CharacterList from '../components/list/CharacterList'
 import useDebounce from '../hooks/useDebounce'
 import FilterSummary from '../components/list/FilterSummary'
+import styles from '../components/list/style/CharacterCard.module.css'
 
 export default function ListPage() {
   const [search, setSearch] = useState('');
@@ -46,20 +47,24 @@ export default function ListPage() {
   const activeFilters = Object.values(filters).filter(v => v && v !== 'all').length;
 
   return (
-    <div className="p-4">
+    <div className="p-4 pt-6">
 
-      <div className='relative w-full'>
+      <div className='w-full pb-4 px-2 flex flex-row justify-between items-center mb-4'>
         <button onClick={() => navigate(-1)} 
-            className="absolute left-[-8px] text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
+            className="text-(--color-primary) !bg-transparent !p-0 text-xl h-6 w-8 flex items-center justify-center">
             <MdArrowBack className='w-8 h-6' />
         </button>
-        <h1 className="w-full pb-8 text-center !text-base font-bold">Advanced Search</h1>
+        <h1 className="text-center !text-base font-bold">Advanced Search</h1>
+        <button onClick={() => navigate('/')} 
+            className="text-(--color-primary) !bg-transparent !py-0 !px-2 text-xl flex items-center justify-center">
+            Done
+        </button>
       </div>
       
       {activeFilters > 0 && <FilterSummary resultsCount={characters.length} activeFilters={activeFilters}></FilterSummary>}
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
-      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={'!mt-10'}/>}
+      {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`!mt-0 !ml-0 content-center !h-[56px] ${styles.card}`}/>}
       {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' feedback={true} />}
     </div>
   )

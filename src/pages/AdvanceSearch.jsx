@@ -65,7 +65,7 @@ export default function ListPage() {
       {loading && <p className="text-gray-500">Loading...</p>}
       {error && <p className="text-red-500">Error loading characters</p>}
       {!loading && !error && <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`!mt-0 !ml-0 content-center !h-[56px] ${styles.card}`}/>}
-      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' feedback={true} />}
+      {!loading && !error && <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={`pl-3`} feedback={true} />}
     </div>
   )
 }

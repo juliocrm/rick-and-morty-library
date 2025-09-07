@@ -113,7 +113,7 @@ export default function ListPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-6 mt-4 md:mt-[44px]">Rick and Morty list</h1>
+      <h1 className="text-xl font-bold mb-6 mt-4 md:mt-[26px]">Rick and Morty list</h1>
       <SearchBar value={search} onChange={setSearch} onFilterClick={handleOpenFilters} />
       {showFilters && isDesktop && (
         <FiltersDropdown
@@ -122,13 +122,22 @@ export default function ListPage() {
           onClose={() => null}
         />
       )}
-      {activeFilters > 0 && isDesktop && <FilterSummary resultsCount={data?.characters?.info?.count || 0} activeFilters={activeFilters}></FilterSummary>}
-      {loading && <p className="text-gray-500 mt-4">Loading...</p>}
-      {error && <p className="text-red-500 mt-4">Error loading characters</p>}
+      {activeFilters > 0 && isDesktop && 
+        <FilterSummary resultsCount={data?.characters?.info?.count || 0} activeFilters={activeFilters}></FilterSummary>
+      }
+      {loading && 
+        <p className="text-gray-500 mt-4">Loading...</p>
+      }
+      {error && 
+        <p className="text-red-500 mt-4">Error loading characters</p>
+      }
+      {starredCharacters.length === 0 && otherCharacters.length === 0 && !loading && !error && 
+        <p className="p-4 text-gray-500 mt-6">No characters found.</p>
+      }
       {!loading && !error && (
         <>
-          <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`${activeFilters > 0 && isDesktop ? 'sm:!mt-0' : '!mt-8 sm:!mt-10'}`} />
-          <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={'!mt-4'} feedback={true} />
+          <CharacterList characters={starredCharacters} listTitle='STARRED CHARACTERS' className={`pl-3 ${activeFilters > 0 && isDesktop ? 'sm:!mt-0' : '!mt-8 sm:!mt-10'}`} />
+          <CharacterList characters={otherCharacters} listTitle='CHARACTERS' className={'!mt-4 pl-3'} />
         </>
       )}
     </div>

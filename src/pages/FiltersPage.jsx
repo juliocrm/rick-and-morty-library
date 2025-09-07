@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import FiltersForm from '../components/list/FiltersForm'
+import FiltersForm from '../components/list/filter/FiltersForm'
 import { MdArrowBack } from 'react-icons/md'
 import useIsDesktop  from '../hooks/useIsDesktop'
 

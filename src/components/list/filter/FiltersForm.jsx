@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import FilterGroup from './FilterGroup'
-import useIsDesktop  from '../../hooks/useIsDesktop'
+import useIsDesktop  from '../../../hooks/useIsDesktop'
 
 export default function FiltersForm({ initial, onApply }) {
   const [characterType, setCharacterType] = useState(initial.characterType || 'all')

@@ -37,18 +37,20 @@ export default function CharacterList({ characters, className, feedback = false,
 
   return (
     <div className="flex flex-col">
-      <div className={classNames}>
-        {(feedback || characters.length > 0) && <h2 className='mb-4 mt-2 sm:mt-6 !text-xs font-semibold !text-(--color-text-secondary)'>{listTitle} {`(${characters.length})`}</h2>}
-        <button onClick={handleSort} className="!p-1 m-1 mx-3 translate-x-[2px] translate-y-[-2px] !outline-none items-center rounded-full hover:bg-gray-100 !bg-transparent">
-          {sortOrder === 'asc' ? <AiOutlineSortAscending size={24} className="text-gray-600 !text-(--color-text-secondary)" /> : <AiOutlineSortDescending size={24} className="text-gray-600 !text-(--color-text-secondary)" />}
-        </button>
-      </div>
+      {(feedback || characters.length > 0) && 
+        <div className={classNames}>
+          <h2 className='mb-4 mt-2 sm:mt-6 !text-xs font-semibold !text-(--color-text-secondary)'>{listTitle} {`(${characters.length})`}</h2>
+          <button onClick={handleSort} className="!p-1 m-1 mx-3 translate-x-[2px] translate-y-[-2px] !outline-none items-center rounded-full hover:bg-gray-100 !bg-transparent">
+            {sortOrder === 'asc' ? <AiOutlineSortAscending size={24} className="text-gray-600 !text-(--color-text-secondary)" /> : <AiOutlineSortDescending size={24} className="text-gray-600 !text-(--color-text-secondary)" />}
+          </button>
+        </div>
+      }
       {sortedCharacters.map((char) => (
         <CharacterCard
           key={char.id}
           character={char}
           selected={char.id === selectedId}
-          onClick={() => { setSelectedId(char.id)}} 
+          onClick={() => { setSelectedId(char.id) }}
         />
       ))}
     </div>

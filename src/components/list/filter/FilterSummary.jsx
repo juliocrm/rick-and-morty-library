@@ -1,6 +1,6 @@
-import Badge from '../common/Badge'
-import styles from './style/CharacterCard.module.css'
-import useIsDesktop from '../../hooks/useIsDesktop'
+import Badge from '../../common/Badge'
+import styles from '../style/CharacterCard.module.css'
+import useIsDesktop from '../../../hooks/useIsDesktop'
 
 export default function FilterSummary({resultsCount, activeFilters}) {
     const isDesktop = useIsDesktop();

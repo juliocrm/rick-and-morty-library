@@ -6,7 +6,7 @@ import { useFavorites } from '../context/FavoritesContext'
 import { MdArrowBack } from 'react-icons/md'
 import CharacterList from '../components/list/CharacterList'
 import useDebounce from '../hooks/useDebounce'
-import FilterSummary from '../components/list/FilterSummary'
+import FilterSummary from '../components/list/filter/FilterSummary'
 import styles from '../components/list/style/CharacterCard.module.css'
 
 export default function ListPage() {

@@ -6,8 +6,8 @@ import { useFavorites } from '../context/FavoritesContext'
 import CharacterList from '../components/list/CharacterList'
 import SearchBar from '../components/list/SearchBar'
 import useDebounce from '../hooks/useDebounce'
-import FiltersDropdown from '../components/list/FiltersDropdown'
-import FilterSummary from '../components/list/FilterSummary'
+import FiltersDropdown from '../components/list/filter/FiltersDropdown'
+import FilterSummary from '../components/list/filter/FilterSummary'
 import useIsDesktop from '../hooks/useIsDesktop'
 
 

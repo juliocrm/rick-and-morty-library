@@ -12,10 +12,11 @@ export default function CharacterCard({ character, onClick, selected }) {
   return (
     <div
       onClick={handleCardClick}
-      className={`flex items-center gap-4 p-3 !px-5
-        hover:bg-gray-50 transition 
-        ${selected ? '!bg-(--color-selected)' : 'bg-white'}
-        ${styles.card}`}
+         className={`flex items-center gap-4 p-3 !px-5
+           hover:bg-gray-50 transition-transform duration-200 ease-out 
+           hover:translate-x-2 
+           ${selected ? '!bg-(--color-selected)' : 'bg-white'}
+           ${styles.card}`}
       role="button"
       tabIndex={0}
     >
